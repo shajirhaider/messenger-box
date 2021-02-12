@@ -1,0 +1,209 @@
+<div class="container-fluid h-100">
+    <div class="row no-gutters h-100">
+        <div [ngClass]="collapsed ? 'col-12' : 'col-9'">
+            <div class="row no-gutters border-bottom h-5">
+                <div class="col-4 border-right">
+                    <nav class="navbar navbar-expand-lg inner-nav">
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                          <ul class="navbar-nav w-100 nav-fill h-5">
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">ONLINE</a>
+                            </li>
+                            <li class="nav-item inner-nav-active">
+                              <a class="nav-link " href="#">ENGAGED</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">QUEUED</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">AGENT</a>
+                            </li>
+                          </ul>  
+                        </div>
+                      </nav>
+    
+                </div>
+                <div class="col">
+                    <div class="row no-gutters">
+                        <div class="col-4">
+                            <div class="p-1">
+                                <div class="text-muted assign-label">Assigned to</div>
+                                <select name="" id="" class="select-box-without-border">
+                                    <option *ngFor="let user of userList" [value]="user.id">{{user.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="float-right p-2 font-18 utility-muted">
+                                <span><i class="fas fa-phone"></i></span>
+                                <span class="mx-3"><i class="fas fa-video"></i></span>
+                                <span><i class="fas fa-ellipsis-v"></i></span>
+                                <span class="vl ml-3"></span>
+                                <span class="mx-3"><i class="fas fa-times"></i></span>
+                                
+                                <span class="clickable collapsebtn" (click)="collapsed = !collapsed"><i [ngClass]="collapsed ? 'fas fa-angle-double-left' : 'fas fa-angle-double-right'"></i></span>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row no-gutters h-100">
+                <div class="col-4 border-right">
+                    <div *ngFor="let user of userList; let i = index" class="border-bottom user-sec" (click)="getCurrentUser(i)">
+                        <div class="p-3" >
+                            <div class="icon-wrapper">
+                                <i class="fa fa-desktop fa-border icon-grey"></i>
+                                <span class="badge"><i class="fas fa-circle"></i></span>
+                             </div>
+                        </div>
+                        <div class="py-3 font-weight-bold" >
+                            <div> {{user.name}}</div>   
+                        </div>
+                    </div>
+    
+                </div>
+                <div class="col">
+                    <app-message-box [senderName]="currentUser.name" [messages] ='currentUser.message' [collapsed]='collapsed' class="w-100"></app-message-box>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!collapsed" class="col border-left" style="position: relative;">
+            <div class="p-3 display-flex border-bottom">
+                <div class="currentUser-sec-icon">
+                    <i class="fas fa-user-circle fa-4x"></i>
+                </div>
+                <div class="ml-2">
+                    <div class="font-20 font-weight-bold">
+                        {{currentUser.name}}
+                    </div>
+                    <div class="text-muted"><i class="fas fa-circle text-success"></i> WEB | New Visitor</div>
+                </div>
+            </div>
+            <div class="p-3 border-bottom">
+                <div class="display-flex">
+                    <div class="currentUser-sec-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="ml-2">
+                        <div class="text-link">View on Map</div>
+                    </div>
+                </div>
+                <div class="display-flex">
+                    <div class="currentUser-sec-icon">
+                        <i class="fab fa-chrome"></i>
+                    </div>
+                    <div class="ml-2">
+                        <div class="text-muted">Google Chrome on Windows 10 | IP</div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-3 border-bottom">
+                <div class="display-flex">
+                    <div class="currentUser-sec-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="ml-2">
+                        <div class="text-muted">{{currentUser.email}}  <i class="fas fa-edit ml-2"></i></div> 
+                    </div>
+                </div>
+                <div class="display-flex">
+                    <div class="currentUser-sec-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="ml-2">
+                        <div class="text-muted">{{currentUser.phone}}  <i class="fas fa-edit ml-2"></i> </div>
+                    </div>
+                </div>
+                <div class="display-flex">
+                    <div class="currentUser-sec-icon">
+                        <i class="fas fa-sticky-note"></i>
+                    </div>
+                    <div class="ml-2">
+                        <div *ngIf='!editNotes'  class="text-muted">{{currentUser.notes}}  <i title="click to edit" class="fas fa-edit ml-2" (click)='editNotes = true'></i> </div>
+                        <div *ngIf='editNotes'  class="display-flex"> 
+                            <div>
+                                <textarea [(ngModel)]='currentUser.notes' class="form-control-sm" rows="3"></textarea>
+                            </div>
+                            <div title="click to save" (click)='editNotes = false'><i class="fas fa-edit ml-2"></i> 
+                            </div>                            
+                        </div>
+
+                    </div>
+                </div>      
+            </div>
+            <div class="p-3 border-bottom">
+                <div class="display-flex">
+                    <div class="currentUser-sec-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div class="ml-2">
+                        <div class="text-link">View Chat History</div>
+                    </div>
+                </div>
+                <div class="display-flex">
+                    <div class="currentUser-sec-icon">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <div class="ml-2">
+                        <div class="text-link" (click)="tagListShow = true">Add Tags</div>
+                    </div>
+                </div>
+                <div class="display-flex">
+                    <div class="currentUser-sec-icon">
+                        <i class="fas fa-user-minus"></i>
+                    </div>
+                    <div class="ml-2">
+                        <div class="text-link">Ban Visitor</div>
+                    </div>
+                </div>      
+            </div>
+            <div class="p-3 border-bottom row no-gutters">
+                <div class="currentUser-sec-icon col-4">
+                    <div class="font-25 text-center">1</div>
+                    <div class="text-center">
+                        <div class="">Total Visits</div>
+                    </div>
+                </div>
+                <div class="currentUser-sec-icon col-4">
+                    <div class="font-25 text-center">-</div>
+                    <div class="text-center">
+                        <div class="">Total Chats</div>
+                    </div>
+                </div>
+                <div class="currentUser-sec-icon col-4">
+                    <div class="font-25 text-center">-</div>
+                    <div class="text-center">
+                        <div class="">Chat Duration</div>
+                    </div>
+                </div>     
+            </div>
+            <div class="p-3">
+                <div class="display-flex">
+                    <div class="currentUser-sec-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="ml-2">
+                        <div class="text-link">View Browing Logs</div>
+                        <div class="text-muted">Visiting Now : http://localhost:4200</div>
+                    </div>
+                </div>     
+            </div>
+            <div class="p-3 taglistContainer border" *ngIf="tagListShow">
+                <span class="tagList-close text-muted" (click)="tagListShow = false"><i class="fas fa-times"></i></span>
+                <div class="selectedTagListBox border">
+                    <ul> <li *ngFor="let tag of selectedTagList; let i = index" class="selectedTag" >{{tag}} <i class="fas fa-times ml-2 clickable" (click)='removeTag(i)'></i></li></ul>
+                    <div class="text-muted">Add tag from the list</div>
+                </div>  
+                <div class="mt-2 tagList border">
+                    <div class="taglist-item text-muted" *ngFor = 'let tags of tagList; let i = index' (click)='addTag(tags)'>{{tags}}  </div>
+                </div> 
+                <div>
+                    Not in the List? <span class="normal-link">Create Tag</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

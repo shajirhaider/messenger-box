@@ -1,0 +1,45 @@
+<div class="container-fluid h-100 p-0">
+    <div class="row h-100 msg-box no-gutters">
+        <div class="col-12">
+            <ul class="msg">
+                <div class="row no-gutters">
+                    <div class="col-2 col-md-4"><hr></div>
+                    <div class="col text-center font-12">{{dateText}}</div>
+                    <div class="col-2 col-md-4"><hr></div>
+                </div>
+                <div *ngIf="messages.length === 0" class="text-success text-center mt-2">
+                    Visitor {{senderName}} joined the chat
+                </div>
+                <li *ngFor="let msg of messages" class="me">
+                    <div class="row no-gutters mb-2">
+                        <div class="col">
+                            <div class="row no-gutters">
+                                <div class="col-12"><span class="me-msg" >{{msg.data}}</span></div>
+                                <div class="col-12"> <span class="msg-date" >{{msg.sender}}, {{msg.date}}</span></div>
+                            </div>
+                        </div>
+                        <div class="ml-2 wid-20px">
+                            <div class="currentUser-sec-icon font-30">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+            <div class="run" [ngClass]="collapsed ? 'wid-66' : 'wid-49' ">
+                <div class="type_msg">
+                    <div class="input_msg_write">
+                        <textarea [(ngModel)]="messageText" rows="3" class="write_msg" placeholder="Type your message..."></textarea>
+                        <button class="msg_send_btn_attachment mr-2" type="button"><i class="fas fa-paperclip"
+                                aria-hidden="true"></i></button>
+                        <button class="msg_send_btn" type="button" (click)="addMessage()">
+                            <img src="../../../assets/send-btn.png" width="25px" height="25px">
+                            <!-- <i class="fas fa-play" aria-hidden="true"></i> -->
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
