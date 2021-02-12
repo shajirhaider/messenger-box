@@ -51,7 +51,7 @@
     
             <div class="row no-gutters h-100">
                 <div class="col-4 border-right">
-                    <div *ngFor="let user of userList; let i = index" class="border-bottom user-sec" (click)="getCurrentUser(i)">
+                    <div *ngFor="let user of userList; let i = index" class="border-bottom user-sec mar-15-ml" [ngClass]="user.id === currentUser.id ? 'active-user' : 'bg-white' " (click)="getCurrentUser(i)">
                         <div class="p-3" >
                             <div class="icon-wrapper">
                                 <i class="fa fa-desktop fa-border icon-grey"></i>

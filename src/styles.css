@@ -226,6 +226,12 @@ color: #9e9e9e;
   padding: 15px;
 }
 
+.mar-15-ml{
+  margin-left: -15px !important;
+}
+.mar-15-mr{
+  margin-right: -15px !important;
+}
 .user-sec{
   height:80px; 
   display: flex;
