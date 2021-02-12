@@ -34,7 +34,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ![Alt text](/src/assets/ss1.PNG?raw=true "Optional Title")
 
-![Alt text](/src/assets/ss2.PNG?raw=true "Optional Title")
+![Alt text](/src/assets/ss2.png?raw=true "Optional Title")
 
 ![Alt text](/src/assets/ss3.PNG?raw=true "Optional Title")
 
